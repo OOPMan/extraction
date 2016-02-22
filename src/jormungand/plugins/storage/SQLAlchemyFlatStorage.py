@@ -3,7 +3,7 @@ from contextlib import contextmanager
 from hashlib import md5
 
 from datetime import datetime, date, time, timedelta
-from jormungand.api import FieldDefinition, generate_field_value
+from jormungand.api.datamodel import FieldDefinition, generate_field_value
 from jormungand.api import StoragePluginInterface
 from simplejson import dumps, JSONEncoder
 from sqlalchemy import Column, String, Integer, DateTime, LargeBinary, create_engine, func

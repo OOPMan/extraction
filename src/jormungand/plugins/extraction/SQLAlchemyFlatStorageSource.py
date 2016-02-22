@@ -3,8 +3,8 @@ from json import loads
 
 from datetime import timedelta
 from dateutil import parser
-from jormungand.api import ExtractionPluginInterface, ExtractedDataItem
-from jormungand.api import FieldDefinition, FIELD_TYPES
+from jormungand.api.extraction import ExtractionPluginInterface, ExtractedDataItem
+from jormungand.api.datamodel import FieldDefinition, FIELD_TYPES
 from jormungand.plugins.storage.SQLAlchemyFlatStorage import StorageRecord, get_scoped_session
 from sqlalchemy import create_engine, func, and_
 

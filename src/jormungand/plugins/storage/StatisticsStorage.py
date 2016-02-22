@@ -1,6 +1,6 @@
 import os
 
-from src.jormungand.api import StoragePluginInterface
+from jormungand.api import StoragePluginInterface
 
 __author__ = 'adam.jorgensen.za@gmail.com'
 
