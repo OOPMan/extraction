@@ -1,4 +1,5 @@
 from yapsy import IPlugin
+
 from postprocessing import PostProcessedDataItem
 
 __author__ = 'adam.jorgensen.za@gmail.com'

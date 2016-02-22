@@ -1,14 +1,15 @@
+import logging
 from contextlib import contextmanager
-from datetime import datetime, date, time, timedelta
-from types import NoneType
-from jormungand.api import StoragePluginInterface
-from jormungand.api.datamodel import FIELD_TYPES, FieldDefinition, generate_field_value
 from hashlib import md5
+
+from datetime import datetime, date, time, timedelta
+from jormungand.api.datamodel import FieldDefinition, generate_field_value
+from jormungand.api import StoragePluginInterface
 from simplejson import dumps, JSONEncoder
+from sqlalchemy import Column, String, Integer, DateTime, LargeBinary, create_engine, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy import Column, String, Integer, DateTime, LargeBinary, create_engine, func
-import logging
+from types import NoneType
 
 __author__ = 'aj@spinglab.co'
 

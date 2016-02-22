@@ -1,9 +1,11 @@
-from api import *
-from yapsy import PluginManager
-import logging
 import json
-import os
+import logging
 import sys
+
+import os
+from yapsy import PluginManager
+
+from api import *
 
 __author__ = 'adam.jorgensen.za@gmail.com'
 

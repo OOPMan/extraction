@@ -1,4 +1,5 @@
 import collections
+
 from yapsy import IPlugin
 
 __author__ = 'adam.jorgensen.za@gmail.com'
