@@ -1,12 +1,12 @@
 import logging
+from json import loads
+
 from datetime import timedelta
 from dateutil import parser
-from json import loads
-from sqlalchemy import create_engine, desc, func, and_
-from sqlalchemy.orm import aliased
-from jormungand.api.datamodel import FieldDefinition, FIELD_TYPES
-from jormungand.api.extraction import ExtractionPluginInterface, ExtractedDataItem
+from jormungand.api import ExtractionPluginInterface, ExtractedDataItem
+from jormungand.api import FieldDefinition, FIELD_TYPES
 from jormungand.plugins.storage.SQLAlchemyFlatStorage import StorageRecord, get_scoped_session
+from sqlalchemy import create_engine, func, and_
 
 __author__ = 'adam.jorgensen.za@gmail.com'
 

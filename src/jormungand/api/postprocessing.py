@@ -1,5 +1,5 @@
 from yapsy import IPlugin
-from decorator import decorator
+
 from extraction import ExtractedDataItem
 
 __author__ = 'adam.jorgensen.za@gmail.com'

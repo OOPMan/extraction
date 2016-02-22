@@ -1,6 +1,7 @@
-from jormungand.api import PostProcessingPluginInterface
-from random import randint
 import logging
+from random import randint
+
+from jormungand.api import PostProcessingPluginInterface
 
 logging = logging.getLogger('JORMUNGAND')
 

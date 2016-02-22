@@ -1,7 +1,8 @@
 from copy import deepcopy
-from yapsy import IPlugin
-from types import NoneType
+
 import datetime
+from types import NoneType
+from yapsy import IPlugin
 
 __author__ = 'adam.jorgensen.za@gmail.com'
 

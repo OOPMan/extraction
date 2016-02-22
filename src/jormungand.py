@@ -1,9 +1,11 @@
-from argparse import ArgumentParser
-from jormungand import JormungandPluginManager
-from urlparse import urlparse
-import os
 import logging
 import sys
+from argparse import ArgumentParser
+from urlparse import urlparse
+
+import os
+
+from jormungand import JormungandPluginManager
 
 __author__ = 'adam.jorgensen.za@gmail.com'
 
