@@ -5,7 +5,7 @@ from urlparse import urlparse
 
 import os
 
-from jormungand import JormungandPluginManager
+from . import JormungandPluginManager
 
 __author__ = 'adam.jorgensen.za@gmail.com'
 
@@ -93,7 +93,7 @@ def jormungand(json_config_file=None, plugin_roots=[], sources=[], logging=loggi
                 plugin.store(extracted_data[data_model_name], data_model_name, data_model)
 
 
-if __name__ == '__main__':
+def main():
     # Ensure directory of extraction script is on the path
     sys.path.append(os.path.dirname(__file__))
     # Configure CLI parser
@@ -110,4 +110,9 @@ if __name__ == '__main__':
     if args.logfile:
         logger.addHandler(logging.FileHandler(args.logfile))
     jormungand(args.config, args.plugin_roots, args.sources, logger)
+
+
+if __name__ == '__main__':
+    main()
+
 
