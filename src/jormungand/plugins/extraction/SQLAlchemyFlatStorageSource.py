@@ -33,6 +33,7 @@ class SQLAlchemyFlatStorageSourcePlugin(ExtractionPluginInterface):
     """
 
     def __init__(self, sqlalchemy_loglevel=None, latest_versions_only=True):
+        super(self, SQLAlchemyFlatStorageSourcePlugin).__init__()
         self.latest_versions_only = latest_versions_only
         if sqlalchemy_loglevel:
             logging.getLogger('sqlalchemy.engine').setLevel(sqlalchemy_loglevel)

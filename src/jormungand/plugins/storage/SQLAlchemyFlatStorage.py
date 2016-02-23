@@ -104,6 +104,7 @@ class SQLAlchemyFlatJSONStoragePlugin(StoragePluginInterface):
     """
 
     def __init__(self, rdbms_url='sqlite:///SQLAlchemyFlatStoragePlugin.db', sqlalchemy_loglevel=None):
+        super(self, SQLAlchemyFlatJSONStoragePlugin).__init__()
         # Init SQLAlchemy
         self.engine = create_engine(rdbms_url)
         if sqlalchemy_loglevel:
