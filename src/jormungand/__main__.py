@@ -10,14 +10,14 @@ from . import JormungandPluginManager
 __author__ = 'adam.jorgensen.za@gmail.com'
 
 
-def jormungand(json_config_file=None, plugin_roots=[], sources=[], logging=logging):
+def jormungand(config_file=None, plugin_roots=[], sources=[], logging=logging):
     """ Entry-point into the Extraction Process """
     #TODO: Refactor into separate functions or, possibly, a class in the extraction module
     # Init Plugin Manager and Plugins
     logging.info('Initialising Jormungand Plugin Manager')
-    plugin_manager = JormungandPluginManager(json_config_file)
-    plugin_manager.extendPluginPlaces([os.path.abspath(plugin_root) for plugin_root in plugin_roots])
-    plugin_manager.extendPluginPlaces([os.path.join(os.path.dirname(__file__))])
+    plugin_manager = JormungandPluginManager(config_file)
+    plugin_manager.extendPluginPlaces([os.path.abspath(plugin_root)
+                                       for plugin_root in plugin_roots])
     plugin_manager.collectPlugins()
     for plugin_info in plugin_manager.getAllPlugins():
         plugin_manager.activatePluginByName(plugin_info.name)
@@ -48,7 +48,7 @@ def jormungand(json_config_file=None, plugin_roots=[], sources=[], logging=loggi
                 setattr(source, 'uri', original_source_value)
                 inputs.append(source)
             else:
-                logger.warn("Provided source {} is neither file, nor "
+                logging.warn("Provided source {} is neither file, nor "
                             "directory! Check that the file exists."
                             .format(source))
         else:
@@ -64,7 +64,8 @@ def jormungand(json_config_file=None, plugin_roots=[], sources=[], logging=loggi
         for data_model_name, data_model in data_models.items():
             for input in inputs:
                 if plugin.can_extract(input, data_model_name, data_model):
-                    logging.info('Extracting data from %s using Data Model %s and Extraction plugin %s ' % (input.uri, data_model_name, plugin))
+                    logging.info('Extracting data from {} using Data Model {} '
+                                 'and Extraction plugin {} '.format(input.uri, data_model_name, plugin))
                     extracted_data[data_model_name].extend(
                         plugin.extract(input, data_model_name, data_model, data_template_generators[data_model_name]))
     # Post-Process
@@ -73,7 +74,8 @@ def jormungand(json_config_file=None, plugin_roots=[], sources=[], logging=loggi
         plugin = plugin_info.plugin_object
         for data_model_name, data_model in data_models.items():
             if plugin.can_process(data_model_name, data_model):
-                logging.info('Post-Processing Data Model %s using Post-Processing plugin %s' % (data_model_name, plugin))
+                logging.info('Post-Processing Data Model {} using '
+                             'Post-Processing plugin {}'.format(data_model_name, plugin))
                 extracted_data[data_model_name] = plugin.process(extracted_data[data_model_name], data_model_name, data_model)
     # Validation
     logging.info('Validating Extracted Data')
@@ -81,7 +83,8 @@ def jormungand(json_config_file=None, plugin_roots=[], sources=[], logging=loggi
         plugin = plugin_info.plugin_object
         for data_model_name, data_model in data_models.items():
             if plugin.can_validate(data_model_name, data_model):
-                logging.info('Validating Data Model %s using Validation plugin %s' % (data_model_name, plugin))
+                logging.info('Validating Data Model {} using Validation '
+                             'plugin {}'.format(data_model_name, plugin))
                 extracted_data[data_model_name] = plugin.validate(extracted_data[data_model_name], data_model_name, data_model)
     # Storage
     logging.info('Storing Extracted Data')
@@ -89,7 +92,8 @@ def jormungand(json_config_file=None, plugin_roots=[], sources=[], logging=loggi
         plugin = plugin_info.plugin_object
         for data_model_name, data_model in data_models.items():
             if plugin.can_store(data_model_name, data_model):
-                logging.info('Storing items of Data Model %s using Storage plugin %s' % (data_model_name, plugin))
+                logging.info('Storing items of Data Model {} using Storage '
+                             'plugin {}'.format(data_model_name, plugin))
                 plugin.store(extracted_data[data_model_name], data_model_name, data_model)
 
 
@@ -97,7 +101,9 @@ def main():
     # Ensure directory of extraction script is on the path
     sys.path.append(os.path.dirname(__file__))
     # Configure CLI parser
-    parser = ArgumentParser(description='Extract data from input sources into a datastore, optionally performing post-processing and validation.')
+    parser = ArgumentParser(description='Extract data from input sources into '
+                                        'a datastore, optionally performing '
+                                        'post-processing and validation.')
     parser.add_argument('-c', '--config', default=None)
     parser.add_argument('-p', '--pluginroots', dest='plugin_roots', default=[], nargs='*', )
     parser.add_argument('-s', '--source', dest='sources', default=[], nargs='*')
