@@ -42,6 +42,9 @@ class JormungandPluginManager(PluginManager.PluginManager):
             ]
             self.getPluginLocator().plugins_places.extend(plugin_roots)
 
+    def extendPluginPlaces(self, paths):
+        self.getPluginLocator().plugins_places.extend(paths)
+
     def loadPlugins(self, callback=None):
         if not hasattr(self, '_candidates'):
             raise ValueError("locatePlugins must be called before loadPlugins")
