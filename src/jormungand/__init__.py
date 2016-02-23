@@ -41,6 +41,7 @@ class JormungandPluginManager(PluginManager.PluginManager):
                 if isinstance(path, (str, unicode))
             ]
             self.getPluginLocator().plugins_places.extend(plugin_roots)
+        self.extendPluginPlaces([os.path.join(os.path.abspath(os.path.dirname(__file__)), 'plugins')])
 
     def extendPluginPlaces(self, paths):
         self.getPluginLocator().plugins_places.extend(paths)
