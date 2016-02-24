@@ -3,10 +3,11 @@ from json import loads
 
 from datetime import timedelta
 from dateutil import parser
-from jormungand.api.extraction import ExtractionPluginInterface, ExtractedDataItem
-from jormungand.api.datamodel import FieldDefinition, FIELD_TYPES
-from jormungand.plugins.storage.SQLAlchemyFlatStorage import StorageRecord, get_scoped_session
 from sqlalchemy import create_engine, func, and_
+
+from jormungand.api.datamodel import FieldDefinition, FIELD_TYPES
+from jormungand.api.extraction import ExtractionPluginInterface, ExtractedDataItem
+from jormungand.plugins.storage.SQLAlchemyFlatStorage import StorageRecord, get_scoped_session
 
 __author__ = 'adam.jorgensen.za@gmail.com'
 
@@ -33,7 +34,7 @@ class SQLAlchemyFlatStorageSourcePlugin(ExtractionPluginInterface):
     """
 
     def __init__(self, sqlalchemy_loglevel=None, latest_versions_only=True):
-        super(self, SQLAlchemyFlatStorageSourcePlugin).__init__()
+        super(SQLAlchemyFlatStorageSourcePlugin, self).__init__()
         self.latest_versions_only = latest_versions_only
         if sqlalchemy_loglevel:
             logging.getLogger('sqlalchemy.engine').setLevel(sqlalchemy_loglevel)

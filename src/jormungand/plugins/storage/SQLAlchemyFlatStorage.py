@@ -3,13 +3,14 @@ from contextlib import contextmanager
 from hashlib import md5
 
 from datetime import datetime, date, time, timedelta
-from jormungand.api.datamodel import FieldDefinition, generate_field_value
-from jormungand.api import StoragePluginInterface
 from simplejson import dumps, JSONEncoder
 from sqlalchemy import Column, String, Integer, DateTime, LargeBinary, create_engine, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from types import NoneType
+
+from jormungand.api import StoragePluginInterface
+from jormungand.api.datamodel import FieldDefinition, generate_field_value
 
 __author__ = 'aj@spinglab.co'
 
@@ -104,7 +105,7 @@ class SQLAlchemyFlatJSONStoragePlugin(StoragePluginInterface):
     """
 
     def __init__(self, rdbms_url='sqlite:///SQLAlchemyFlatStoragePlugin.db', sqlalchemy_loglevel=None):
-        super(self, SQLAlchemyFlatJSONStoragePlugin).__init__()
+        super(SQLAlchemyFlatJSONStoragePlugin, self).__init__()
         # Init SQLAlchemy
         self.engine = create_engine(rdbms_url)
         if sqlalchemy_loglevel:

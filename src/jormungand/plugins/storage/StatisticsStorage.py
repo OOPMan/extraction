@@ -14,7 +14,7 @@ class StatisticsStoragePlugin(StoragePluginInterface):
         """
         A custom output path prefix may be specific for the data files generated
         """
-        super(self, StatisticsStoragePlugin).__init__()
+        super(StatisticsStoragePlugin, self).__init__()
         self.output_path = output_path
 
     def can_store(self, data_model_name, data_model):
