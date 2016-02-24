@@ -18,7 +18,7 @@ class DatasetPrunerPlugin(PostProcessingPluginInterface):
         Keyword arguments:
         maximum_items -- Specifies the maximum number of items to emit (defaults to None, indicating no pruning)
         """
-        super(self, DatasetPrunerPlugin).__init__()
+        super(DatasetPrunerPlugin, self).__init__()
         self.maximum_items = maximum_items
 
     def can_process(self, data_model_name, data_model):
