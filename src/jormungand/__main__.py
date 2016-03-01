@@ -16,8 +16,9 @@ def jormungand(config_file=None, plugin_roots=[], sources=[], logging=logging):
     # Init Plugin Manager and Plugins
     logging.info('Initialising Jormungand Plugin Manager')
     plugin_manager = JormungandPluginManager(config_file)
-    plugin_manager.extendPluginPlaces([os.path.abspath(plugin_root)
-                                       for plugin_root in plugin_roots])
+    plugin_manager.getPluginLocator().updatePluginPlaces([
+        os.path.abspath(plugin_root) for plugin_root in plugin_roots
+    ])
     plugin_manager.collectPlugins()
     for plugin_info in plugin_manager.getAllPlugins():
         plugin_manager.activatePluginByName(plugin_info.name)

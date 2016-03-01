@@ -1,8 +1,9 @@
-import sys
 import imp
+import sys
+
 import os
-from yapsy import PluginManager, NormalizePluginNameForModuleName, log
 from yaml import safe_load
+from yapsy import PluginManager, NormalizePluginNameForModuleName, log
 
 from jormungand.api import *
 
@@ -40,11 +41,8 @@ class JormungandPluginManager(PluginManager.PluginManager):
                 for path in self.config['plugin_roots']
                 if isinstance(path, (str, unicode))
             ]
-            self.getPluginLocator().plugins_places.extend(plugin_roots)
-        self.extendPluginPlaces([os.path.join(os.path.abspath(os.path.dirname(__file__)), 'plugins')])
-
-    def extendPluginPlaces(self, paths):
-        self.getPluginLocator().plugins_places.extend(paths)
+            self.getPluginLocator().updatePluginPlaces(plugin_roots)
+        self.getPluginLocator().updatePluginPlaces([os.path.join(os.path.abspath(os.path.dirname(__file__)), 'plugins')])
 
     def loadPlugins(self, callback=None):
         if not hasattr(self, '_candidates'):
@@ -126,7 +124,7 @@ class JormungandPluginManager(PluginManager.PluginManager):
                                         plugin_info.plugin_object = element(**plugin_constructer_args)
                                     else:
                                         plugin_info.plugin_object = element()
-                                        plugin_info_reference = plugin_info
+                                    plugin_info_reference = plugin_info
                                 except Exception:
                                     exc_info = sys.exc_info()
                                     log.error("Unable to create plugin object: {}".format(candidate_filepath), exc_info=exc_info)
