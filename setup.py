@@ -10,7 +10,7 @@ storing it again in a common format.
 
 setup(
     name='jormungand',
-    version='1.0.1',
+    version='1.0.2',
     packages=find_packages('./src'),
     package_dir={
         '': 'src'
