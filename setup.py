@@ -43,7 +43,7 @@ setup(
         'Operating System :: OS Independent',
     ],
     install_requires=[
-        'yapsy==1.11.223', 'pyyaml==3.11'
+        'yapsy==1.11.223', 'pyyaml>=4.2b1'
     ],
     extras_requires={
         'SQLAlchemyFlatStorage': ['sqlalchemy>=0.9.3', 'simplejson'],
